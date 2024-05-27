@@ -1,0 +1,103 @@
+[
+    {
+      "id": 1,
+      "username": "johndoe",
+      "password": "password123",
+      "email": "johndoe@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "role": "user",
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "username": "janedoe",
+      "password": "password456",
+      "email": "janedoe@example.com",
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "role": "user",
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "username": "adminuser",
+      "password": "adminpassword",
+      "email": "admin@example.com",
+      "firstName": "Admin",
+      "lastName": "User",
+      "role": "admin",
+      "isActive": true
+    },
+    {
+      "id": 4,
+      "username": "alice",
+      "password": "alicepassword",
+      "email": "alice@example.com",
+      "firstName": "Alice",
+      "lastName": "Wonderland",
+      "role": "user",
+      "isActive": true
+    },
+    {
+      "id": 5,
+      "username": "bob",
+      "password": "bobpassword",
+      "email": "bob@example.com",
+      "firstName": "Bob",
+      "lastName": "Builder",
+      "role": "user",
+      "isActive": false
+    },
+    {
+      "id": 6,
+      "username": "charlie",
+      "password": "charliepassword",
+      "email": "charlie@example.com",
+      "firstName": "Charlie",
+      "lastName": "Chocolate",
+      "role": "user",
+      "isActive": true
+    },
+    {
+      "id": 7,
+      "username": "david",
+      "password": "davidpassword",
+      "email": "david@example.com",
+      "firstName": "David",
+      "lastName": "Goliath",
+      "role": "user",
+      "isActive": true
+    },
+    {
+      "id": 8,
+      "username": "eve",
+      "password": "evepassword",
+      "email": "eve@example.com",
+      "firstName": "Eve",
+      "lastName": "Apple",
+      "role": "user",
+      "isActive": false
+    },
+    {
+      "id": 9,
+      "username": "frank",
+      "password": "frankpassword",
+      "email": "frank@example.com",
+      "firstName": "Frank",
+      "lastName": "Castle",
+      "role": "user",
+      "isActive": true
+    },
+    {
+      "id": 10,
+      "username": "grace",
+      "password": "gracepassword",
+      "email": "grace@example.com",
+      "firstName": "Grace",
+      "lastName": "Hopper",
+      "role": "admin",
+      "isActive": true
+    }
+  ]
+  
