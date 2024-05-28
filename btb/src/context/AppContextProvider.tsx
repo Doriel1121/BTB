@@ -28,7 +28,7 @@ export default function AppContextProvider({ children }: AppProviderProps) {
   const [episodes, setEpisodes] = useState<RickAndMortyEpisodeResponse>([]);
   const [locations, setLocations] = useState<RickAndMortyLocationResponse>([]);
   const [type, setType] = useState<string>("character");
-  const [user, setUser] = useState<boolean>(localStorage.getItem("userData"));
+  const [user, setUser] = useState<any>(localStorage.getItem("userData"));
 
   const handleCharacters = (charactersList: RickAndMortyCharacters) => {
     setCharacters(charactersList);

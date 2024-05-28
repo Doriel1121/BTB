@@ -1,5 +1,5 @@
 // src/components/CharacterDialog.tsx
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -24,7 +24,10 @@ const CharacterDialog: React.FC<CharacterDialogProps> = ({
   onClose,
 }) => {
   const { user } = useContext(AppContext);
-  const isAdmin = JSON.parse(user).role === "admin" ? true : false;
+  const isAdmin =
+    JSON.parse(localStorage.getItem("userData")).role === "admin"
+      ? true
+      : false;
 
   return (
     <Dialog

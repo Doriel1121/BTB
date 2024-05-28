@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { LoginModel } from "../models/LoginMode.interface";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import ErrorPage from "./ErrorPage";
 export default function LoginPage() {
   const userRef = useRef<HTMLInputElement>(null);
   const { data, isLoading, isError, fetchData } = useFetch<any>();
+  const [displayMessage, setDisplayMessage] = useState(false);
   const navigate = useNavigate();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
@@ -22,9 +23,14 @@ export default function LoginPage() {
     sendRequest(payload);
   }
   const handleSuccess = (data: any) => {
-    localStorage.setItem("jwtToken", data?.token);
-    localStorage.setItem("userData", JSON.stringify(data?.user));
-    navigate("/");
+    if (data.success) {
+      localStorage.setItem("jwtToken", data?.token);
+      localStorage.setItem("userData", JSON.stringify(data?.user));
+      setDisplayMessage(false);
+      navigate("/");
+    } else {
+      setDisplayMessage(true);
+    }
   };
 
   function sendRequest(payload: LoginModel) {
@@ -62,6 +68,9 @@ export default function LoginPage() {
             name="password"
             required
           />
+          <span className="errorMessage">
+            {displayMessage ? "Incorrect Password or Username" : null}
+          </span>
           <Button
             sx={{ background: "black", width: "100%", marginTop: "10px" }}
             variant="contained"

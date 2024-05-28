@@ -53,6 +53,7 @@ body{
   padding: 2% 0;
   max-width: 400px;
   min-width: 280px;
+  max-height: 400px;
 
 }
 .form{
@@ -81,6 +82,9 @@ body{
 .tableRow:hover{
   background: #e2eded;
   cursor: pointer;
+}
+.errorMessage{
+  color: red;
 }
 
 @media screen and (max-width: 600px) {
