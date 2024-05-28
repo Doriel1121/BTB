@@ -1,5 +1,5 @@
 // src/components/CharacterDialog.tsx
-import React from "react";
+import React, { useContext } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -9,6 +9,8 @@ import {
   Box,
 } from "@mui/material";
 import { Character } from "../models/Character.model";
+import ContentForAdmin from "./ContentForAdmin";
+import { AppContext } from "../context/AppContextProvider";
 
 interface CharacterDialogProps {
   character: Character | null;
@@ -21,6 +23,9 @@ const CharacterDialog: React.FC<CharacterDialogProps> = ({
   isOpen,
   onClose,
 }) => {
+  const { user } = useContext(AppContext);
+  const isAdmin = JSON.parse(user).role === "admin" ? true : false;
+
   return (
     <Dialog
       sx={{ width: "100%", minWidth: "300px" }}
@@ -50,7 +55,6 @@ const CharacterDialog: React.FC<CharacterDialogProps> = ({
               />
             )}
           </Box>
-
           <Box
             sx={{
               display: "flex",
@@ -74,6 +78,7 @@ const CharacterDialog: React.FC<CharacterDialogProps> = ({
             <span>
               <strong>Location:</strong> {character?.location.name}
             </span>
+            {isAdmin ? <ContentForAdmin content={character} /> : null}
           </Box>
         </Box>
       </DialogContent>

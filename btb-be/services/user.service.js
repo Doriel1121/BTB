@@ -1,9 +1,4 @@
-const fs = require("fs");
-const path = require("path");
 const bcrypt = require("bcrypt");
-
-// const usersPath = path.join(__dirname, "../users.json");
-// const users = JSON.parse(fs.readFileSync(usersPath, "utf-8"));
 
 exports.authenticateUser = async ({ username, password }, users) => {
   const user = users.find((user) => user.username === username);
@@ -14,7 +9,12 @@ exports.authenticateUser = async ({ username, password }, users) => {
   if (!isPasswordValid) {
     return { success: false, message: "Invalid password" };
   }
-  return { success: true, message: "Authentication successful", user };
+  const { password: userPassword, ...userDto } = user;
+  return {
+    success: true,
+    message: "Authentication successful",
+    user: userDto,
+  };
 };
 
 exports.checkIsAdmin = (role) => {

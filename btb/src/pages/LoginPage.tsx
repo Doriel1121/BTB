@@ -11,10 +11,6 @@ export default function LoginPage() {
   const { data, isLoading, isError, fetchData } = useFetch<any>();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -23,31 +19,21 @@ export default function LoginPage() {
       username: fieldsValues.username as string,
       password: fieldsValues.password as string,
     };
-    console.log(payload);
     sendRequest(payload);
   }
   const handleSuccess = (data: any) => {
     localStorage.setItem("jwtToken", data?.token);
-    localStorage.setItem("role", data?.user?.role);
+    localStorage.setItem("userData", JSON.stringify(data?.user));
     navigate("/");
-    console.log("Data fetched successfully:", data);
-  };
-
-  const handleError = (error: any) => {
-    console.error("Error fetching data:", error);
   };
 
   function sendRequest(payload: LoginModel) {
-    fetchData("login", "post", payload, handleSuccess, handleError);
+    fetchData("login", "post", payload, handleSuccess);
   }
 
   if (isLoading) return <Loader />;
   if (isError) return <ErrorPage />;
-  // if (data) {
-  //   localStorage.setItem("jwtToken", data?.token);
-  //   localStorage.setItem("role", data?.user?.role);
-  //   navigate("/");
-  // }
+
   return (
     <div className="formWrapper">
       <div className="formContainer">

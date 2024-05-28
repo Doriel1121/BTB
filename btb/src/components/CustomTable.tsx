@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import {
-  TextField,
   Table,
   TableBody,
   TableCell,
@@ -8,10 +7,8 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Autocomplete,
   TablePagination,
 } from "@mui/material";
-import { AppContext } from "../context/AppContextProvider";
 import CharacterDialog from "./Modal";
 
 interface CustomTableProps {
@@ -24,20 +21,8 @@ interface CustomTableProps {
 }
 
 const CustomTable = ({ data }) => {
-  //   const {
-  //     type,
-  //     handleCharacters,
-  //     handleEpisodes,
-  //     handleLocations,
-  //     characters,
-  //     episodes,
-  //     locations,
-  //   } = useContext(AppContext);
-  console.log("data befor error", data);
-
   const [rows, setRows] = useState(data || []);
-  //   const [columns, setColumns] = useState([]);
-  //   const [searchQuery, setSearchQuery] = useState("");
+
   const [options, setOptions] = useState(data?.map((item) => item.name));
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -55,10 +40,6 @@ const CustomTable = ({ data }) => {
   };
 
   useEffect(() => {
-    // const filteredRows = data?.filter((row) =>
-    //   row.name.toLowerCase().includes(searchQuery.toLowerCase())
-    // );
-    // setRows(filteredRows);
     setOptions(data?.map((item) => item.name));
   }, [data]);
 
@@ -77,11 +58,13 @@ const CustomTable = ({ data }) => {
       <TableContainer component={Paper}>
         <Table sx={{ background: "#fbfbfb" }}>
           <TableHead>
-            <TableCell width={"10%"}>Id</TableCell>
-            <TableCell width={"15%"}>Image</TableCell>
-            <TableCell width={"25%"}>Name</TableCell>
-            <TableCell width={"25%"}>Status</TableCell>
-            <TableCell width={"25%"}>Species</TableCell>
+            <TableRow>
+              <TableCell width={"10%"}>Id</TableCell>
+              <TableCell width={"15%"}>Image</TableCell>
+              <TableCell width={"25%"}>Name</TableCell>
+              <TableCell width={"25%"}>Status</TableCell>
+              <TableCell width={"25%"}>Species</TableCell>
+            </TableRow>
           </TableHead>
           <TableBody>
             {rows

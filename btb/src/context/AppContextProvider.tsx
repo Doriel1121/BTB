@@ -12,7 +12,8 @@ export interface AppContextInterface {
   handleEpisodes: any;
   handleLocations: any;
   handleCharacters: any;
-  isAdmin: boolean;
+  user: boolean;
+  handleLogout: any;
 }
 
 const defaultState = {} as AppContextInterface;
@@ -27,9 +28,7 @@ export default function AppContextProvider({ children }: AppProviderProps) {
   const [episodes, setEpisodes] = useState<RickAndMortyEpisodeResponse>([]);
   const [locations, setLocations] = useState<RickAndMortyLocationResponse>([]);
   const [type, setType] = useState<string>("character");
-  const [isAdmin, setIsAdmin] = useState<boolean>(
-    localStorage.getItem("role") === "admin" ? true : false
-  );
+  const [user, setUser] = useState<boolean>(localStorage.getItem("userData"));
 
   const handleCharacters = (charactersList: RickAndMortyCharacters) => {
     setCharacters(charactersList);
@@ -43,9 +42,11 @@ export default function AppContextProvider({ children }: AppProviderProps) {
   const contentToFetch = (type: string) => {
     setType(type);
   };
-  //   const handleRole = (role: string) => {
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
 
-  //   };
   const values = {
     characters,
     episodes,
@@ -55,11 +56,9 @@ export default function AppContextProvider({ children }: AppProviderProps) {
     handleLocations,
     contentToFetch,
     type,
-    isAdmin,
+    user,
+    handleLogout,
   };
 
-  return (
-    <AppContext.Provider value={values}>{children}</AppContext.Provider>
-    // <div>provider</div>
-  );
+  return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 }

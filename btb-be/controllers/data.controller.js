@@ -6,6 +6,23 @@ exports.getRelevantData = async (req, res, callback) => {
   axios
     .get(url)
     .then((response) => {
+      result.success = true;
+      result.data = response.data;
+      callback(result);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      result.success = false;
+      result.data = null;
+      callback(result);
+    });
+};
+exports.getCharacterLocation = async (req, res, callback) => {
+  const url = "https://rickandmortyapi.com/api/location/" + req.id;
+  const result = {};
+  axios
+    .get(url)
+    .then((response) => {
       console.log("Data:", response.data);
       result.success = true;
       result.data = response.data;

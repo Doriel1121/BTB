@@ -72,8 +72,12 @@ app
   })
 
   .get("/getData/:type", authenticateJWT, (req, res) => {
-    console.log("params", req.params);
     RickData.getRelevantData(req.params, res, (result) => {
+      res.send(result);
+    });
+  })
+  .get("/getLocation/location/:id", authenticateJWT, (req, res) => {
+    RickData.getCharacterLocation(req.params, res, (result) => {
       res.send(result);
     });
   })

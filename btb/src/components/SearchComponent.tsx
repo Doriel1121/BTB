@@ -1,32 +1,11 @@
 // src/components/SearchBar.tsx
 import React, { useState, useCallback, useContext } from "react";
 import { Autocomplete, TextField, CircularProgress, Box } from "@mui/material";
-import axios from "axios";
 import debounce from "lodash.debounce";
 import { useFetch } from "../hooks/useFetch";
 import { AppContext } from "../context/AppContextProvider";
 import CharacterDialog from "./Modal";
-
-interface Character {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  type: string;
-  gender: string;
-  origin: {
-    name: string;
-    url: string;
-  };
-  location: {
-    name: string;
-    url: string;
-  };
-  image: string;
-  episode: string[];
-  url: string;
-  created: string;
-}
+import { Character } from "../models/Character.model";
 
 const SearchBar: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -63,15 +42,12 @@ const SearchBar: React.FC = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<{}>, value: string) => {
-    let trimedValue = value.replace(/[^a-zA-Z\s]/g, "");
-    setSearchTerm(trimedValue);
-    fetchCharacters(trimedValue);
+    setSearchTerm(value);
+    fetchCharacters(value);
   };
 
-  const handleSelect = (event: React.ChangeEvent<{}>, value: string | null) => {
-    const character = results.find(
-      (char) => char.name === value?.replace(/[^a-zA-Z\s]/g, "")
-    );
+  const handleSelect = (event: React.ChangeEvent<{}>, value: any) => {
+    const character = results.find((char) => char.name === value?.name);
     if (character) {
       setSelectedCharacter(character);
       setIsModalOpen(true);
@@ -86,11 +62,18 @@ const SearchBar: React.FC = () => {
     <Box>
       <Autocomplete
         freeSolo
-        options={results.map(
-          (character) => character.name + "-" + character.id
-        )}
+        options={results.map((character) => ({
+          name: character.name,
+          id: character.id,
+        }))}
         onInputChange={handleChange}
+        getOptionLabel={(option) => option.name}
         onChange={handleSelect}
+        renderOption={(props, option) => (
+          <li {...props} key={option.id}>
+            {option.name}
+          </li>
+        )}
         renderInput={(params) => (
           <TextField
             {...params}
