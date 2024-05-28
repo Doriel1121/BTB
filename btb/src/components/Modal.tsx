@@ -1,5 +1,4 @@
 // src/components/CharacterDialog.tsx
-import React, { useContext, useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -10,7 +9,6 @@ import {
 } from "@mui/material";
 import { Character } from "../models/Character.model";
 import ContentForAdmin from "./ContentForAdmin";
-import { AppContext } from "../context/AppContextProvider";
 
 interface CharacterDialogProps {
   character: Character | null;
