@@ -23,7 +23,6 @@ const CharacterDialog: React.FC<CharacterDialogProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { user } = useContext(AppContext);
   const isAdmin =
     JSON.parse(localStorage.getItem("userData")).role === "admin"
       ? true
