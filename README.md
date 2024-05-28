@@ -1,17 +1,20 @@
 # BTB
 
-Frontend:
-Run **npm run dev** in order to start the application
 
-Server:
-run npm start in order to run the server
+Clone the project into your machine.
+
+**Frontend:**
+open the command line and run **npm run dev** in order to start the application
+
+**Server:**
+open the command line and run **npm start** in order to run the server
 
 
-in order to logi as admin please use these credentials:
+In order to login as **admin** please use these credentials:
 user: admin
 password: adminpassword
 
-in order to login as  guest use this:
+In order to login as  **guest** use this:
 user: janedoe
 password: password456
 
